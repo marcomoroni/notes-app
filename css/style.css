@@ -1,0 +1,246 @@
+@font-face {
+    font-family: Inter;
+    src: url(../fonts/InterV.var.ttf);
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url(../fonts/InterV-Italic.var.ttf);
+    font-style: italic;
+}
+
+#app {
+    --color-bg: white;
+    --color-primary: #3c3c3c;
+    --color-secondary: #9B9B9B;
+    --color-tertiary: #b8b8b8;
+    --color-line: #E4E4E4;
+    --color-placeholder: #9B9B9B;
+    --color-selected-bg: #e0e0e0;
+    --color-selected-primary: black;
+    --btn-height: 32px;
+    --margin: 16px;
+    --line-thickness: 1.4px;
+    --btns-gap: 7px;
+
+    font-family: Inter;
+    font-variation-settings: "wght" 380;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    font-size: 14px;
+    letter-spacing: -0.006px;
+    line-height: 1.6;
+    user-select: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    #app {
+        --color-bg: #1F1F1F;
+        --color-primary: #EDEDED;
+        --color-secondary: #c9c9c9;
+        --color-tertiary: #adadad;
+        --color-line: #696969;
+        --color-placeholder: #747474;
+        --color-selected-bg: #484848;
+        --color-selected-primary: white;
+    }
+}
+
+button {
+    height: var(--btn-height);
+    min-width: var(--btn-height);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.button__label {
+    font-variation-settings: "wght" 450;
+    color: var(--color-primary);
+}
+
+.button__icon {
+    --size: 20px;
+    height: var(--size);
+    width: var(--size);
+}
+
+.button__icon * {
+    fill: var(--color-primary)
+}
+
+button:disabled {
+    opacity: 0.3;
+}
+
+.buttons_gap {
+    width: var(--btns-gap);
+}
+
+.text_field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: var(--btn-height);
+    border: var(--color-line) var(--line-thickness) solid;
+    border-radius: 9999px;
+}
+
+.text_field__input {
+    flex-grow: 1;
+    padding-left: 12px;
+    padding-right: 7px;
+}
+
+.text_field__input::placeholder {
+    color: var(--color-placeholder);
+}
+
+.text_field__clear {
+    /* Looks like the button layout is a bit bugged as it won't correctly place itself to
+       the very far right end of the container. This line fixes it. */
+    transform: translateX(2px);
+}
+
+.bar {
+    height: calc(var(--btn-height) + (var(--margin) * 2));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: var(--margin);
+    padding-right: var(--margin);
+    flex-shrink: 0;
+}
+
+.horizontal_line {
+    flex-shrink: 0;
+    height: var(--line-thickness);
+    background-color: var(--color-bg);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.horizontal_line.line__visible {
+    background-color: var(--color-line);
+}
+
+.main_row {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+}
+
+.notes__left_col {
+    position: relative;
+    display: flex;
+    width: 350px;
+    flex-direction: column;
+}
+
+.notes__right_col {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.notes__right_bar {
+    justify-content: flex-end;
+}
+
+.notes__search {
+    flex-grow: 1;
+}
+
+.notes__list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+    padding-top: var(--margin);
+    padding-bottom: var(--margin);
+    height: 100%;
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.notes__list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 11px 14px 0px 14px;
+    border-radius: 6px;
+    margin-left: var(--margin);
+    margin-right: var(--margin);
+    cursor: pointer;
+    flex-shrink: 0;
+
+    /* --- how to make it procedural? (3 lines) */
+    height: 91px;
+}
+
+.notes__list-item--selected {
+    background-color: var(--color-selected-bg);
+}
+
+.notes__list-item__body {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+.notes__list-item--selected .notes__list-item__body {
+    color: var(--color-selected-primary);
+}
+
+.notes__list-item__last-updated {
+    min-width: 30px;
+    margin-left: 8px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.005px;
+    color: var(--color-secondary);
+}
+
+.notes__list-item--not_in_search {
+    display: none;
+}
+
+.notes__list__count {
+    color: var(--color-tertiary);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.notes__right_col__body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    flex-grow: 1;
+}
+
+.notes__body {
+    max-width: 520px;
+    width: 520px;
+    flex-grow: 1;
+    white-space: pre-wrap;
+    margin-top: var(--margin);
+    margin-bottom: var(--margin);
+}
